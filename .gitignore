@@ -1,0 +1,9 @@
+.venv
+.idea
+*.iml
+/data
+data_loading/__pycache__/__init__.cpython-310.pyc
+data_loading/__pycache__/data_loader.cpython-310.pyc
+api/__pycache__/__init__.cpython-310.pyc
+api/__pycache__/routes.cpython-310.pyc
+__pycache__
