@@ -2,7 +2,9 @@ from threading import Lock
 
 import pandas as pd
 import os
+
 from sklearn.model_selection import train_test_split
+
 
 class DataLoader:
     _instance = None
@@ -21,8 +23,11 @@ class DataLoader:
         self.path: str = path
         self.train_df: pd.DataFrame = pd.DataFrame()
         self.test_df: pd.DataFrame = pd.DataFrame()
+        self.train_y: pd.Series = pd.Series()
+        self.test_y: pd.Series = pd.Series()
         self.test_size: float = test_size
         self._initialized = True
+        self.class_names: list[str] = []
 
     def load(self):
         data = []
@@ -33,4 +38,6 @@ class DataLoader:
             data.extend(files_labels)
         full_df = pd.DataFrame.from_records(data, columns=['file', 'label'])
         self.train_df, self.test_df = train_test_split(full_df, test_size=self.test_size)
+        self.train_y = self.train_df['label']
+        self.test_y = self.test_df['label']
 
