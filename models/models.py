@@ -3,6 +3,7 @@ from threading import Lock
 import sklearn
 
 from models.random_classifier import RandomClassifier
+from models.simple_cnn_classifier import SimpleCNNClassifier
 
 
 class ModelHandler:
@@ -20,7 +21,8 @@ class ModelHandler:
         if self._initialized:
             return
         self.models = {
-            'Random': RandomClassifier
+            'Random': RandomClassifier,
+            'SCC': SimpleCNNClassifier
         }
         self.model_list = [key for key in self.models.keys()]
         self.trained_models = {}

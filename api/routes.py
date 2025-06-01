@@ -38,9 +38,13 @@ def test():
 @api_bp.route('/predict', methods=['POST'])
 def predict():
     try:
-        data = request.get_json()
-        model_name = data.get('model')
-        prediction = model_handler.predict(model_name, {})
+        if 'image' not in request.files:
+            return jsonify({'error': 'No image file provided'}), 400
+        file = request.files['image']
+        model_name = request.form.get('model')
+        if not model_name:
+            return jsonify({'error': 'No model name provided'}), 400
+        prediction = model_handler.predict(model_name, DataLoader.load_requested_image(file))
         return jsonify({'message': 'Prediction completed', 'result': prediction}), 200
     except Exception as e:
         return jsonify({'error': str(e)}), 500

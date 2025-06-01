@@ -1,5 +1,4 @@
 from flask import Flask
-from keras.src.legacy.preprocessing.image import ImageDataGenerator
 
 from api.routes import api_bp
 from data_loading.data_loader import DataLoader
@@ -14,5 +13,4 @@ def main():
 
 if __name__ == '__main__':
     main()
-    ImageDataGenerator
     app.run(debug=True)
